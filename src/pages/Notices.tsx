@@ -7,9 +7,25 @@ import {
   Megaphone,
   Pin,
   Clock,
+  X,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
-const noticesData = [
+interface Notice {
+  id: number;
+  title: string;
+  description: string;
+  type: string;
+  date: string;
+  pinned: boolean;
+}
+
+const noticesData: Notice[] = [
   {
     id: 1,
     title: "Water Supply Disruption - Urgent",
@@ -64,35 +80,36 @@ const typeConfig: Record<string, { icon: typeof AlertTriangle; label: string; bg
   emergency: {
     icon: AlertTriangle,
     label: "Emergency",
-    bg: "bg-red-50",
-    border: "border-red-200",
-    iconColor: "text-red-600",
+    bg: "bg-red-50 dark:bg-red-900/20",
+    border: "border-red-200 dark:border-red-800",
+    iconColor: "text-red-600 dark:text-red-400",
   },
   event: {
     icon: Calendar,
     label: "Event",
-    bg: "bg-primary-light",
+    bg: "bg-primary-light dark:bg-primary/10",
     border: "border-primary/20",
     iconColor: "text-primary",
   },
   info: {
     icon: Info,
     label: "Information",
-    bg: "bg-blue-50",
-    border: "border-blue-200",
-    iconColor: "text-blue-600",
+    bg: "bg-blue-50 dark:bg-blue-900/20",
+    border: "border-blue-200 dark:border-blue-800",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
   announcement: {
     icon: Megaphone,
     label: "Announcement",
-    bg: "bg-amber-50",
-    border: "border-amber-200",
-    iconColor: "text-amber-600",
+    bg: "bg-amber-50 dark:bg-amber-900/20",
+    border: "border-amber-200 dark:border-amber-800",
+    iconColor: "text-amber-600 dark:text-amber-400",
   },
 };
 
 const Notices = () => {
   const [filter, setFilter] = useState("all");
+  const [selectedNotice, setSelectedNotice] = useState<Notice | null>(null);
 
   const filteredNotices = noticesData.filter(
     (n) => filter === "all" || n.type === filter
@@ -100,6 +117,10 @@ const Notices = () => {
 
   const pinnedNotices = filteredNotices.filter((n) => n.pinned);
   const otherNotices = filteredNotices.filter((n) => !n.pinned);
+
+  const handleNoticeClick = (notice: Notice) => {
+    setSelectedNotice(notice);
+  };
 
   return (
     <DashboardLayout>
@@ -129,7 +150,7 @@ const Notices = () => {
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 filter === f.id
                   ? "bg-primary text-primary-foreground"
-                  : "bg-white text-muted-foreground hover:bg-muted shadow-card"
+                  : "bg-white dark:bg-gray-800 text-muted-foreground hover:bg-muted dark:hover:bg-gray-700 shadow-card"
               }`}
             >
               {f.label}
@@ -152,10 +173,11 @@ const Notices = () => {
                 return (
                   <div
                     key={notice.id}
-                    className={`${config.bg} border-2 ${config.border} rounded-2xl p-6 transition-all hover:shadow-md`}
+                    onClick={() => handleNoticeClick(notice)}
+                    className={`${config.bg} border-2 ${config.border} rounded-2xl p-6 transition-all hover:shadow-md cursor-pointer`}
                   >
                     <div className="flex items-start gap-4">
-                      <div className={`w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0`}>
+                      <div className={`w-12 h-12 rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center flex-shrink-0`}>
                         <config.icon className={`w-6 h-6 ${config.iconColor}`} />
                       </div>
                       <div className="flex-1">
@@ -171,7 +193,7 @@ const Notices = () => {
                         <h3 className="font-display font-semibold text-foreground text-lg mb-2">
                           {notice.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
                           {notice.description}
                         </p>
                       </div>
@@ -195,7 +217,8 @@ const Notices = () => {
                 return (
                   <div
                     key={notice.id}
-                    className="bg-white rounded-2xl shadow-card p-6 transition-all hover:shadow-floating card-hover"
+                    onClick={() => handleNoticeClick(notice)}
+                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-card p-6 transition-all hover:shadow-floating card-hover cursor-pointer"
                   >
                     <div className="flex items-start gap-4">
                       <div className={`w-10 h-10 rounded-xl ${config.bg} flex items-center justify-center flex-shrink-0`}>
@@ -230,6 +253,45 @@ const Notices = () => {
             <p className="text-muted-foreground">No notices found.</p>
           </div>
         )}
+
+        {/* Notice Detail Modal */}
+        <Dialog open={!!selectedNotice} onOpenChange={() => setSelectedNotice(null)}>
+          <DialogContent className="sm:max-w-lg">
+            <DialogHeader>
+              <DialogTitle className="font-display text-xl">
+                {selectedNotice?.title}
+              </DialogTitle>
+            </DialogHeader>
+            {selectedNotice && (
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  {(() => {
+                    const config = typeConfig[selectedNotice.type];
+                    return (
+                      <>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${config.bg} ${config.iconColor} border ${config.border}`}>
+                          {config.label}
+                        </span>
+                        <span className="text-sm text-muted-foreground flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {selectedNotice.date}
+                        </span>
+                      </>
+                    );
+                  })()}
+                </div>
+                <p className="text-foreground leading-relaxed">
+                  {selectedNotice.description}
+                </p>
+                <div className="pt-4 border-t border-border dark:border-gray-700">
+                  <p className="text-xs text-muted-foreground">
+                    Issued by: Society Office, Green Valley Apartments
+                  </p>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </DashboardLayout>
   );

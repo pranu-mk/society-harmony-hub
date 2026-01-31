@@ -11,7 +11,7 @@ const summaryData = [
     value: "12",
     change: "+2 this month",
     icon: ClipboardList,
-    iconBg: "bg-primary/10",
+    iconBg: "bg-primary/10 dark:bg-primary/20",
     iconColor: "text-primary",
   },
   {
@@ -19,24 +19,24 @@ const summaryData = [
     value: "3",
     change: "Awaiting action",
     icon: Clock,
-    iconBg: "bg-amber-100",
-    iconColor: "text-amber-600",
+    iconBg: "bg-amber-100 dark:bg-amber-900/30",
+    iconColor: "text-amber-600 dark:text-amber-400",
   },
   {
     title: "In Progress",
     value: "4",
     change: "Being resolved",
     icon: AlertCircle,
-    iconBg: "bg-blue-100",
-    iconColor: "text-blue-600",
+    iconBg: "bg-blue-100 dark:bg-blue-900/30",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
   {
     title: "Resolved",
     value: "5",
     change: "This month: 3",
     icon: CheckCircle2,
-    iconBg: "bg-emerald-100",
-    iconColor: "text-emerald-600",
+    iconBg: "bg-emerald-100 dark:bg-emerald-900/30",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
   },
 ];
 
@@ -46,7 +46,7 @@ export function SummaryCards() {
       {summaryData.map((item, index) => (
         <div
           key={index}
-          className="bg-white rounded-2xl p-5 shadow-card card-hover cursor-pointer"
+          className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-card card-hover cursor-pointer"
           style={{ animationDelay: `${index * 0.1}s` }}
         >
           <div className="flex items-start justify-between mb-4">

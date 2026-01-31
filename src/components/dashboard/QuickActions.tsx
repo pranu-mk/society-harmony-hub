@@ -2,10 +2,8 @@ import { Link } from "react-router-dom";
 import {
   MessageSquarePlus,
   FileText,
-  Receipt,
   Phone,
   Wrench,
-  Car,
 } from "lucide-react";
 
 const actions = [
@@ -23,28 +21,16 @@ const actions = [
     path: "/notices",
   },
   {
-    title: "Pay Maintenance",
-    description: "Clear your monthly dues",
-    icon: Receipt,
-    path: "#",
-  },
-  {
     title: "Emergency Contact",
     description: "24/7 helpline numbers",
     icon: Phone,
-    path: "#",
+    path: "/emergency-contact",
   },
   {
     title: "Book Amenity",
     description: "Reserve club house, gym etc.",
     icon: Wrench,
-    path: "#",
-  },
-  {
-    title: "Parking Request",
-    description: "Visitor parking allocation",
-    icon: Car,
-    path: "#",
+    path: "/book-amenity",
   },
 ];
 
@@ -54,7 +40,7 @@ export function QuickActions() {
       <h2 className="font-display text-lg font-semibold text-foreground mb-4">
         Quick Actions
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {actions.map((action, index) => (
           <Link
             key={index}
@@ -62,12 +48,12 @@ export function QuickActions() {
             className={`group relative rounded-2xl p-4 transition-all duration-200 hover:-translate-y-1 ${
               action.accent
                 ? "bg-gradient-to-br from-primary to-primary-dark text-white shadow-lg hover:shadow-xl"
-                : "bg-white text-foreground shadow-card hover:shadow-floating"
+                : "bg-white dark:bg-gray-800 text-foreground shadow-card hover:shadow-floating"
             }`}
           >
             <div
               className={`w-10 h-10 rounded-xl mb-3 flex items-center justify-center ${
-                action.accent ? "bg-white/20" : "bg-primary/10"
+                action.accent ? "bg-white/20" : "bg-primary/10 dark:bg-primary/20"
               }`}
             >
               <action.icon

@@ -44,7 +44,7 @@ const statusLabels: Record<string, string> = {
 
 export function RecentComplaints() {
   return (
-    <div className="bg-white rounded-2xl shadow-card p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-card p-6">
       <div className="flex items-center justify-between mb-5">
         <h2 className="font-display text-lg font-semibold text-foreground">
           Recent Complaints
@@ -61,9 +61,9 @@ export function RecentComplaints() {
         {complaints.map((complaint) => (
           <div
             key={complaint.id}
-            className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-muted transition-colors cursor-pointer"
+            className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 dark:bg-gray-700/50 hover:bg-muted dark:hover:bg-gray-700 transition-colors cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
               <complaint.icon className="w-5 h-5 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
