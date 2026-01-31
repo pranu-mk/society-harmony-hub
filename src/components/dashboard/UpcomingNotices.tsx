@@ -28,24 +28,24 @@ const notices = [
 const typeConfig: Record<string, { icon: typeof AlertTriangle; bg: string; iconColor: string }> = {
   warning: {
     icon: AlertTriangle,
-    bg: "bg-amber-100",
-    iconColor: "text-amber-600",
+    bg: "bg-amber-100 dark:bg-amber-900/30",
+    iconColor: "text-amber-600 dark:text-amber-400",
   },
   event: {
     icon: Calendar,
-    bg: "bg-primary/10",
+    bg: "bg-primary/10 dark:bg-primary/20",
     iconColor: "text-primary",
   },
   info: {
     icon: Info,
-    bg: "bg-blue-100",
-    iconColor: "text-blue-600",
+    bg: "bg-blue-100 dark:bg-blue-900/30",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
 };
 
 export function UpcomingNotices() {
   return (
-    <div className="bg-white rounded-2xl shadow-card p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-card p-6">
       <div className="flex items-center justify-between mb-5">
         <h2 className="font-display text-lg font-semibold text-foreground">
           Latest Notices
@@ -64,7 +64,7 @@ export function UpcomingNotices() {
           return (
             <div
               key={notice.id}
-              className="p-4 rounded-xl border border-border hover:border-primary/30 transition-colors cursor-pointer"
+              className="p-4 rounded-xl border border-border dark:border-gray-700 hover:border-primary/30 transition-colors cursor-pointer"
             >
               <div className="flex items-start gap-3">
                 <div

@@ -91,9 +91,9 @@ const statusLabels: Record<string, string> = {
 };
 
 const priorityStyles: Record<string, string> = {
-  low: "bg-emerald-100 text-emerald-700",
-  medium: "bg-amber-100 text-amber-700",
-  high: "bg-red-100 text-red-700",
+  low: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+  medium: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+  high: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
 };
 
 const MyComplaints = () => {
@@ -118,7 +118,7 @@ const MyComplaints = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-2xl shadow-card p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-card p-4 mb-6">
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Search */}
             <div className="relative flex-1">
@@ -126,7 +126,7 @@ const MyComplaints = () => {
               <input
                 type="text"
                 placeholder="Search complaints..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-muted border-0 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-muted dark:bg-gray-700 border-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </div>
 
@@ -136,7 +136,7 @@ const MyComplaints = () => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-2.5 rounded-xl bg-muted border-0 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="px-4 py-2.5 rounded-xl bg-muted dark:bg-gray-700 border-0 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
@@ -153,17 +153,17 @@ const MyComplaints = () => {
           {filteredComplaints.map((complaint) => (
             <div
               key={complaint.id}
-              className="bg-white rounded-2xl shadow-card overflow-hidden"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-card overflow-hidden"
             >
               {/* Main Row */}
               <div
-                className="p-5 cursor-pointer hover:bg-muted/30 transition-colors"
+                className="p-5 cursor-pointer hover:bg-muted/30 dark:hover:bg-gray-700/30 transition-colors"
                 onClick={() =>
                   setExpandedId(expandedId === complaint.id ? null : complaint.id)
                 }
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
                     <complaint.icon className="w-6 h-6 text-primary" />
                   </div>
 
@@ -206,7 +206,7 @@ const MyComplaints = () => {
 
               {/* Expanded Details */}
               {expandedId === complaint.id && (
-                <div className="border-t border-border p-5 bg-muted/20 animate-fade-in">
+                <div className="border-t border-border dark:border-gray-700 p-5 bg-muted/20 dark:bg-gray-700/20 animate-fade-in">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Description */}
                     <div>

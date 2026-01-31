@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   MessageSquarePlus,
@@ -9,6 +9,8 @@ import {
   Building2,
   ChevronLeft,
   ChevronRight,
+  Phone,
+  Wrench,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -18,12 +20,24 @@ const navItems = [
   { icon: MessageSquarePlus, label: "Raise Complaint", path: "/raise-complaint" },
   { icon: ClipboardList, label: "My Complaints", path: "/my-complaints" },
   { icon: Bell, label: "Notices", path: "/notices" },
+  { icon: Phone, label: "Emergency Contact", path: "/emergency-contact" },
+  { icon: Wrench, label: "Book Amenity", path: "/book-amenity" },
   { icon: User, label: "Profile", path: "/profile" },
 ];
 
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear all localStorage
+    localStorage.clear();
+    // Redirect to home page
+    navigate("/");
+    // Force reload to reset any state
+    window.location.href = "/";
+  };
 
   return (
     <aside
@@ -75,6 +89,7 @@ export function Sidebar() {
       {/* Footer */}
       <div className="p-4 border-t border-white/10">
         <button
+          onClick={handleLogout}
           className={cn(
             "nav-item w-full text-white/60 hover:text-white",
             collapsed && "justify-center px-3"
