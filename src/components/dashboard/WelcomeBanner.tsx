@@ -33,10 +33,6 @@ export function WelcomeBanner() {
             <p className="text-xs text-white/70">Society</p>
             <p className="font-semibold">Green Valley Apartments</p>
           </div>
-          <div className="px-4 py-2 rounded-xl bg-accent/20 backdrop-blur border border-accent/30">
-            <p className="text-xs text-white/70">Maintenance Due</p>
-            <p className="font-semibold text-accent">₹5,500</p>
-          </div>
         </div>
       </div>
     </div>
