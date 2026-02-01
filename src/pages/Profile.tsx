@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { BackButton } from "@/components/layout/BackButton";
 import {
   User,
   Mail,
@@ -33,6 +34,7 @@ const Profile = () => {
   return (
     <DashboardLayout>
       <div className="max-w-4xl mx-auto">
+        <BackButton />
         {/* Header */}
         <div className="mb-8">
           <h1 className="font-display text-2xl font-bold text-foreground mb-2">
