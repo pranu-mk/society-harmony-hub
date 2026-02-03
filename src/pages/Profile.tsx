@@ -4,8 +4,6 @@ import { BackButton } from "@/components/layout/BackButton";
 import {
   User,
   Mail,
-  Phone,
-  Building2,
   Home,
   Edit3,
   Save,
@@ -20,7 +18,6 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     name: "Rajesh Sharma",
     email: "rajesh.sharma@email.com",
-    phone: "+91 98765 43210",
   });
 
   const handleSave = () => {
@@ -57,23 +54,13 @@ const Profile = () => {
               <h2 className="font-display font-semibold text-xl text-foreground mb-1">
                 {formData.name}
               </h2>
-              <p className="text-sm text-muted-foreground mb-4">
-                Resident since 2019
-              </p>
 
-              <div className="space-y-3 text-left">
+              <div className="space-y-3 text-left mt-4">
                 <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 dark:bg-gray-700/50">
                   <Home className="w-5 h-5 text-primary" />
                   <div>
                     <p className="text-xs text-muted-foreground">Flat Number</p>
                     <p className="text-sm font-medium text-foreground">A-402</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 dark:bg-gray-700/50">
-                  <Building2 className="w-5 h-5 text-primary" />
-                  <div>
-                    <p className="text-xs text-muted-foreground">Tower</p>
-                    <p className="text-sm font-medium text-foreground">Tower 1</p>
                   </div>
                 </div>
               </div>
@@ -143,22 +130,6 @@ const Profile = () => {
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
-                    }
-                    disabled={!isEditing}
-                    className="form-input disabled:bg-muted dark:disabled:bg-gray-700 disabled:cursor-not-allowed"
-                  />
-                </div>
-
-                <div>
-                  <label className="form-label flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-muted-foreground" />
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
                     }
                     disabled={!isEditing}
                     className="form-input disabled:bg-muted dark:disabled:bg-gray-700 disabled:cursor-not-allowed"
